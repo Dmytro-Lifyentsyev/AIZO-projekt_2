@@ -57,6 +57,14 @@ public:
         data[size] = value;
         size++;
     }
+
+    // Funkcja do usuwania elementu z konca tablicy 
+    void pop_back() {
+        if (size > 0) {
+            size--;
+        }
+    }
+
     // Funkcja do pobierania aktualnej liczby elementów w tablicy
     size_t getSize() const {
         return size;

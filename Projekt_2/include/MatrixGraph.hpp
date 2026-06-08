@@ -46,4 +46,24 @@ public:
             std::cout << "\n";
         }
     }
+
+	// Implementacja metody getNeighbors, ktora zwraca tablice sasiadow dla danego wierzcholka w formacie Edge (z klasy bazowej)
+    Tablica<Edge> getNeighbors(int vertex) const override {
+		Tablica<Edge> neighbors; // Tablica do przechowywania sasiadow w formacie Edge (z klasy bazowej)
+        if (vertex < 0 || vertex >= verticesCount) return neighbors;
+
+		for (int c = 0; c < edgesCount; ++c) { // iterujemy po kolumnach (krawędziach) dla danego wierzcholka (wiersza)
+            bool isOutgoing = (matrix[vertex][c] > 0); 
+
+			if (isOutgoing) { // jeśli jest krawędź wychodząca z tego wierzchołka 
+				for (int r = 0; r < verticesCount; ++r) { // szukamy w tej kolumnie drugiego wierzchołka, który jest połączony tą krawędzią
+                    if (r != vertex && matrix[r][c] != 0) {
+						neighbors.push_back(Edge(vertex, r, matrix[vertex][c])); // Dodajemy sasiada do tablicy sasiadow w formacie Edge
+                        break;
+                    }
+                }
+            }
+        }
+		return neighbors; // Zwracamy tablice sasiadow dla danego wierzcholka
+    }
 };

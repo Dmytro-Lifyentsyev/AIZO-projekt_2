@@ -1,4 +1,13 @@
 #pragma once
+#include "Tablica.hpp"
+
+struct Edge {
+    int src;     // wierzcholek startowy
+    int dest;    // wierzcholek koncowy
+    int weight;  // waga krawedzi
+
+	Edge(int s = -1, int d = -1, int w = 0) : src(s), dest(d), weight(w) {} // Konstruktor 
+};
 
 // Abstrakcyjna klasa bazowa dla grafu, definiujaca interfejs i podstawowe dane.
 class Graph {
@@ -17,6 +26,7 @@ public:
 
 	virtual void addEdge(int startNode, int endNode, int weight) = 0; // Czysto wirtualna metoda do dodawania krawedzi, musi byc zaimplementowana w klasach pochodnych
 	virtual void display() const = 0; // Czysto wirtualna metoda do wyswietlania grafu, musi byc zaimplementowana w klasach pochodnych
+	virtual Tablica<Edge> getNeighbors(int vertex) const = 0; // wirtualna metoda do pobierania sasiadow danego wierzcholka, musi byc zaimplementowana w klasach pochodnych
 
     int getVerticesCount() const { return verticesCount; }
     int getEdgesCount() const { return edgesCount; }

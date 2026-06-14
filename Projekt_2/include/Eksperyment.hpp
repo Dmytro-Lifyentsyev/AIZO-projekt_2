@@ -7,6 +7,8 @@
 #include "Generator.hpp"
 #include "Tablica.hpp"
 #include "Prim.hpp"
+#include "Kruskal.hpp"
+#include "Dijkstra.hpp"
 #include "Utils.hpp"
 
 using namespace std;
@@ -26,13 +28,19 @@ void uruchomAlgorytm(Graph* graf, Parameters::Algorithms alg) {
     case Parameters::Algorithms::kruskal:
         if (graf->getIsDirected()) 
             cerr << "Blad: Kruskal wymaga grafu nieskierowanego\n";
-        else {/* TODO: Kruskal::run(graf); */}
+        else
+        {
+	        Kruskal::run(graf);
+        }
         break;
 
     case Parameters::Algorithms::dijkstra:
         if (!graf->getIsDirected()) 
             cerr << "Blad: Dijkstra wymaga grafu skierowanego\n";
-        else {/* TODO: Dijkstra::run(graf); */}
+        else
+        {
+            Dijkstra::run(graf, Parameters::vertexStart, Parameters::vertexEnd);
+        }
         break;
 
     case Parameters::Algorithms::bellmanFord:
@@ -129,8 +137,7 @@ void przeprowadzEksperyment() {
                         continue;
                     }
 
-                    if (Parameters::vertexCount <= 10) 
-                        graf->display();
+                	graf->display();
 
                     uruchomAlgorytm(graf, testowaneAlgorytmy[a]);
 

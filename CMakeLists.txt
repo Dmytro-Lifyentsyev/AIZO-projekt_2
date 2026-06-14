@@ -19,6 +19,13 @@ add_executable(Projekt_2
     "Projekt_2/include/ListGraph.hpp"
     "Projekt_2/include/Reader.hpp"
     "Projekt_2/include/Parameters.h"
+    "Projekt_2/include/Eksperyment.hpp"
+    "Projekt_2/include/Generator.hpp"
+    "Projekt_2/include/Utils.hpp"
+    "Projekt_2/include/MinHeap.hpp"
+    "Projekt_2/include/Kruskal.hpp"
+    "Projekt_2/include/Prim.hpp"
+    "Projekt_2/include/Dijkstra.hpp"
 )
 if(UNIX)
     target_include_directories(Projekt_2 PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Projekt_2/include")

@@ -7,6 +7,8 @@ struct Edge {
     int weight;  // waga krawedzi
 
 	Edge(int s = -1, int d = -1, int w = 0) : src(s), dest(d), weight(w) {} // Konstruktor 
+	bool operator<(const Edge& other) const { return weight < other.weight; } // Operator porownania, uzywany do sortowania krawedzi po wadze
+	bool operator>(const Edge& other) const { return weight > other.weight; } // Operator porownania, uzywany do sortowania krawedzi po wadze
 };
 
 // Abstrakcyjna klasa bazowa dla grafu, definiujaca interfejs i podstawowe dane.

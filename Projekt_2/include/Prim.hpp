@@ -18,7 +18,7 @@ public:
 		Tablica<bool> visited(V); // Tablica do śledzenia odwiedzonych wierzchołków, inicjalizowana na false
         for (int i = 0; i < V; ++i) visited.push_back(false);
 
-		MinHeap pq; // Kopiec minimalny do przechowywania krawędzi, posortowany według wagi
+		MinHeap<Edge> pq; // Kopiec minimalny do przechowywania krawędzi, posortowany według wagi
 
 		int mstWeight = 0; // Zmienna do przechowywania całkowitej wagi MST
 		int edgesInMST = 0; // Licznik krawędzi dodanych do MST

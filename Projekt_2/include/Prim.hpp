@@ -7,11 +7,6 @@
 class Prim{
 public:
     static void run(Graph* graph) {
-        if (graph->getIsDirected()) { 
-            std::cerr << "Blad: Algorytm Prima wymaga grafu nieskierowanego\n";
-            return;
-        }
-
         int V = graph->getVerticesCount();
         if (V == 0) return;
 

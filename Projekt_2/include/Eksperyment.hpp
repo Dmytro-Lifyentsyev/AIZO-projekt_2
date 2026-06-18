@@ -9,6 +9,8 @@
 #include "Prim.hpp"
 #include "Kruskal.hpp"
 #include "Dijkstra.hpp"
+#include "BellmanFord.hpp"
+#include "FordFulkerson.hpp"
 #include "Utils.hpp"
 
 using namespace std;
@@ -29,30 +31,28 @@ void uruchomAlgorytm(Graph* graf, Parameters::Algorithms alg) {
         if (graf->getIsDirected()) 
             cerr << "Blad: Kruskal wymaga grafu nieskierowanego\n";
         else
-        {
 	        Kruskal::run(graf);
-        }
         break;
 
     case Parameters::Algorithms::dijkstra:
         if (!graf->getIsDirected()) 
             cerr << "Blad: Dijkstra wymaga grafu skierowanego\n";
         else
-        {
             Dijkstra::run(graf, Parameters::vertexStart, Parameters::vertexEnd);
-        }
         break;
 
     case Parameters::Algorithms::bellmanFord:
         if (!graf->getIsDirected()) 
             cerr << "Blad: Bellman-Ford wymaga grafu skierowanego\n";
-        else {/* TODO: BellmanFord::run(graf); */ }
+        else
+	        BellmanFord::run(graf, Parameters::vertexStart, Parameters::vertexEnd);
         break;
 
     case Parameters::Algorithms::fordFulkerson:
         if (!graf->getIsDirected()) 
             cerr << "Blad: Ford-Fulkerson wymaga grafu skierowanego\n";
-        else {/* TODO: FordFulkerson::run(graf); */ }
+        else
+	        FordFulkerson::run(graf, Parameters::vertexStart, Parameters::vertexEnd);
         break;
 
     default:

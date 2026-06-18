@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <iostream>
+#include <climits>
 #include "Parameters.h"
 #include "Tablica.hpp"
 
@@ -59,5 +61,33 @@ public:
             struktury.push_back(Parameters::Structures::adjacencyList);
         }
         return struktury;
+    }
+
+    // Funkcja do wypisania scieżki 
+    static void printSinglePath(int startNode, int endNode, const Tablica<int>& dist, const Tablica<int>& prev) {
+        std::cout << "Najkrotsza sciezka V" << startNode << " -> V" << endNode << " | Koszt: ";
+
+        // Jeśli dystans wynosi INT_MAX, oznacza to, że algorytm nigdy tam nie dotarł
+        if (dist[endNode] == INT_MAX) {
+            std::cout << "brak trasy\n";
+        }
+        else {
+            std::cout << dist[endNode] << " | Trasa: ";
+
+            // Zbieranie trasy: Zaczynamy od końca (endNode) i cofamy się używając tablicy prev
+            Tablica<int> path;
+            int current = endNode;
+            while (current != -1) {
+                path.push_back(current); // Dodajemy aktualny wierzchołek do trasy
+                current = prev[current]; // Cofamy się do poprzedniego wierzchołka na trasie, aż dotrzemy do startu 
+            }
+
+            // Wyswietlamy trasę we właściwej kolejności od startu do celu 
+            for (int j = path.getSize() - 1; j >= 0; --j) {
+                std::cout << "V" << path[j];
+                if (j > 0) std::cout << " -> ";
+            }
+            std::cout << "\n";
+        }
     }
 };

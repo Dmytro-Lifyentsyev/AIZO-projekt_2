@@ -26,6 +26,8 @@ add_executable(Projekt_2
     "Projekt_2/include/Kruskal.hpp"
     "Projekt_2/include/Prim.hpp"
     "Projekt_2/include/Dijkstra.hpp"
+    "Projekt_2/include/BellmanFord.hpp"
+    "Projekt_2/include/FordFulkerson.hpp"
 )
 if(UNIX)
     target_include_directories(Projekt_2 PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Projekt_2/include")

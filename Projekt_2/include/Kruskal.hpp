@@ -77,11 +77,6 @@ private:
 
 public:
     static void run(Graph* graph) {
-        if (graph->getIsDirected()) {
-            std::cerr << "Blad: Algorytm Kruskala wymaga grafu nieskierowanego\n";
-            return;
-        }
-
 		int V = graph->getVerticesCount(); // Pobiera liczbę wierzchołków w grafie
         if (V == 0) return;
 

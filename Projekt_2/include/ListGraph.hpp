@@ -35,15 +35,15 @@ public:
         }
     }
 
-    void display() const override {
+    void display(std::ostream& out = std::cout) const override {
         for (int i = 0; i < verticesCount; ++i) {
-            std::cout << "V" << i << " -> ";
+            out << "V" << i << " -> ";
 
             for (auto it = adjList[i].begin(); it != adjList[i].end(); ++it) {
                 ListEdge e = *it;
-                std::cout << "[V" << e.destination << " | " << e.weight << "]  ";
+                out << "[V" << e.destination << " | " << e.weight << "]  ";
             }
-            std::cout << "\n";
+            out << "\n";
         }
     }
 

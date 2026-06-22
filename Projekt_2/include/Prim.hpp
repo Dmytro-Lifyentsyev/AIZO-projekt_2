@@ -6,7 +6,7 @@
 
 class Prim{
 public:
-    static void run(Graph* graph) {
+    static void run(Graph* graph, std::ostream& out = std::cout) {
         int V = graph->getVerticesCount();
         if (V == 0) return;
 
@@ -18,7 +18,8 @@ public:
 		int mstWeight = 0; // Zmienna do przechowywania całkowitej wagi MST
 		int edgesInMST = 0; // Licznik krawędzi dodanych do MST
 
-        std::cout << "Krawedzie wchodzace w sklad MST:\n";
+        if (Parameters::runMode == Parameters::RunModes::singleFile)
+			out << "Krawedzie wchodzace w sklad MST:\n";
 
 		int startNode = 0; // wierzchowek początkowy 
 		visited[startNode] = true; // Oznacza wierzchołek początkowy jako odwiedzony
@@ -42,7 +43,8 @@ public:
 			mstWeight += minEdge.weight; // Dodaje wagę krawędzi do całkowitej wagi MST
 			edgesInMST++; // Zwiększa licznik krawędzi w MST
 
-            std::cout << "Dodano krawedz: " << u << " - " << v << " (waga: " << minEdge.weight << ")\n";
+            if (Parameters::runMode == Parameters::RunModes::singleFile)
+				out << "Dodano krawedz: " << u << " - " << v << " (waga: " << minEdge.weight << ")\n";
 
 			Tablica<Edge> nextNeighbors = graph->getNeighbors(v); // Pobiera sąsiadów nowo dodanego wierzchołka
 			for (size_t i = 0; i < nextNeighbors.getSize(); ++i) { // Dodaje krawędzie sąsiadów do kopca
@@ -52,11 +54,9 @@ public:
             }
         }
 
-        if (edgesInMST != V - 1) {
+        if (edgesInMST != V - 1) 
             std::cout << "Nie udalo sie zbudowac MST. Graf prawdopodobnie nie jest spojny\n";
-        }
-        else {
-            std::cout << "Calkowity koszt MST: " << mstWeight << "\n";
-        }
+        else if (Parameters::runMode == Parameters::RunModes::singleFile) 
+            out << "Calkowity koszt MST: " << mstWeight << "\n";
     }
 };

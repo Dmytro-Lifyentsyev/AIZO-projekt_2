@@ -17,7 +17,7 @@ add_executable(Projekt_2
     "Projekt_2/include/Graph.hpp"
     "Projekt_2/include/MatrixGraph.hpp"
     "Projekt_2/include/ListGraph.hpp"
-    "Projekt_2/include/Reader.hpp"
+    "Projekt_2/include/Reader_Writer.hpp"
     "Projekt_2/include/Parameters.h"
     "Projekt_2/include/Eksperyment.hpp"
     "Projekt_2/include/Generator.hpp"
@@ -28,6 +28,8 @@ add_executable(Projekt_2
     "Projekt_2/include/Dijkstra.hpp"
     "Projekt_2/include/BellmanFord.hpp"
     "Projekt_2/include/FordFulkerson.hpp"
+    "Projekt_2/include/ZapisCSV.hpp"
+    "Projekt_2/include/Stoper.hpp"
 )
 if(UNIX)
     target_include_directories(Projekt_2 PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Projekt_2/include")

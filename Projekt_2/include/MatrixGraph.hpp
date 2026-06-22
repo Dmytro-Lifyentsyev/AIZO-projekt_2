@@ -38,12 +38,12 @@ public:
         currentEdgeIndex++; // Przechodzimy do nastepnej kolumny (krawędzi)
     }
 
-	void display() const override { // Wyświetlanie macierzy incydencji
+	void display(std::ostream& out = std::cout) const override { // Wyświetlanie macierzy incydencji
         for (int i = 0; i < verticesCount; ++i) {
             for (int j = 0; j < edgesCount; ++j) {
-                std::cout << matrix[i][j] << "\t";
+                out << matrix[i][j] << "\t";
             }
-            std::cout << "\n";
+            out << "\n";
         }
     }
 

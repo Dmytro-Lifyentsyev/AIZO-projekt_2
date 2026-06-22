@@ -40,7 +40,7 @@ private:
     }
 
 public:
-    static void run(Graph* graph, int startNode, int endNode) {
+    static void run(Graph* graph, int startNode, int endNode, std::ostream& out = std::cout) {
         int V = graph->getVerticesCount(); // Pobiera liczbę wierzchołków w grafie
         if (V < 2) return; // Potrzebuje min. 2 wierzchołka (źródło i ujście)
 
@@ -112,12 +112,12 @@ public:
                 }
                 path.push_back(Start);
 
-                std::cout << "Sciezka powiekszajaca: ";
+                out << "Sciezka powiekszajaca: ";
                 for (int j = path.getSize() - 1; j >= 0; --j) {
-                    std::cout << "V" << path[j];
-                    if (j > 0) std::cout << " -> ";
+                    out << "V" << path[j];
+                    if (j > 0) out << " -> ";
                 }
-                std::cout << " | Przepchano: " << pathFlow << "\n";
+                out << " | Przepchano: " << pathFlow << "\n";
             }
 
             // Aktualizuje przepustowości resztkowe (odejmij w przód, dodaj w tył)
@@ -132,7 +132,7 @@ public:
 
 		// Wypisywanie wyniku końcowego dla SingleFile
         if (Parameters::runMode == Parameters::RunModes::singleFile) {
-            std::cout << "\nStan krawedzi (Zajety przeplyw / Pojemnosc)\n";
+            out << "\nStan krawedzi (Zajety przeplyw / Pojemnosc)\n";
 
             for (int u = 0; u < V; ++u) {
                 Tablica<Edge> neighbors = graph->getNeighbors(u);
@@ -143,12 +143,12 @@ public:
                 	int flowUsed = originalCapacity - rGraph[u][v]; // Przepływ to oryginalna pojemność minus to, co zostało w rGraph
 
                     if (flowUsed > 0) {
-                        std::cout << "Krawedz V" << u << " -> V" << v
+                        out << "Krawedz V" << u << " -> V" << v
                             << " | Wykorzystano: " << flowUsed << " / " << originalCapacity << "\n";
                     }
                 }
             }
-            std::cout << "Maksymalny przeplyw ze zrodla V" << Start << " do ujscia V" << Sink << " wynosi: " << maxFlow << "\n\n";
+            out << "Maksymalny przeplyw ze zrodla V" << Start << " do ujscia V" << Sink << " wynosi: " << maxFlow << "\n\n";
         }
     }
 };

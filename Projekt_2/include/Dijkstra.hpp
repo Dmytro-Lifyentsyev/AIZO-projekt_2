@@ -20,7 +20,7 @@ private:
     };
 
 public:
-    static void run(Graph* graph, int startNode, int endNode = -1) {
+    static void run(Graph* graph, int startNode, int endNode = -1, std::ostream& out = std::cout) {
 		int V = graph->getVerticesCount(); // Pobiera liczbę wierzchołków w grafie
         if (V == 0) return;
 
@@ -86,13 +86,13 @@ public:
         if (Parameters::runMode == Parameters::RunModes::singleFile) {
             if (endNode >= 0 && endNode < V) {
                 // Jeśli podano -e, wypisuje tylko tę jedną trasę
-                Utils::printSinglePath(Start, endNode, dist, prev);
+                Utils::printSinglePath(Start, endNode, dist, prev, out);
             }
             else {
                 // Jeśli nie podano -e, wypisuje wszystkie trasy ze startu
-                std::cout << "Sciezki od V" << Start << " do wszystkich wierzcholkow:\n";
+                out << "Sciezki od V" << Start << " do wszystkich wierzcholkow:\n";
                 for (int i = 0; i < V; ++i) {
-                    if (i != Start) Utils::printSinglePath(Start, i, dist, prev);
+                    if (i != Start) Utils::printSinglePath(Start, i, dist, prev, out);
                 }
             }
         }

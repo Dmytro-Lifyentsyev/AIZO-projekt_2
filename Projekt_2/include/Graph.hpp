@@ -27,7 +27,7 @@ public:
 	virtual ~Graph() = default; // Wirtualny destruktor, zeby zapewnic poprawne czyszczenie pamieci przy usuwaniu przez wskaznik do klasy bazowej
 
 	virtual void addEdge(int startNode, int endNode, int weight) = 0; // Czysto wirtualna metoda do dodawania krawedzi, musi byc zaimplementowana w klasach pochodnych
-	virtual void display() const = 0; // Czysto wirtualna metoda do wyswietlania grafu, musi byc zaimplementowana w klasach pochodnych
+	virtual void display(std::ostream& out = std::cout) const = 0; // Czysto wirtualna metoda do wyswietlania grafu, musi byc zaimplementowana w klasach pochodnych
 	virtual Tablica<Edge> getNeighbors(int vertex) const = 0; // wirtualna metoda do pobierania sasiadow danego wierzcholka, musi byc zaimplementowana w klasach pochodnych
 
     int getVerticesCount() const { return verticesCount; }

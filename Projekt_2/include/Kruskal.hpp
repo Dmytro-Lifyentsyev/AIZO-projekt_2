@@ -76,7 +76,7 @@ private:
     }
 
 public:
-    static void run(Graph* graph) {
+    static void run(Graph* graph, std::ostream& out = std::cout) {
 		int V = graph->getVerticesCount(); // Pobiera liczbę wierzchołków w grafie
         if (V == 0) return;
 
@@ -100,7 +100,8 @@ public:
 		int mstWeight = 0; // Zmienna do przechowywania całkowitej wagi MST
 		int edgesInMST = 0; // Licznik krawędzi dodanych do MST
 
-        std::cout << "Krawedzie wchodzace w sklad MST:\n";
+        if (Parameters::runMode == Parameters::RunModes::singleFile)
+			out << "Krawedzie wchodzace w sklad MST:\n";
 
         for (size_t i = 0; i < allEdges.getSize(); ++i) {
 			int u = allEdges[i].src; // Pobiera wierzchołek startowy krawędzi
@@ -111,7 +112,8 @@ public:
                 mstWeight += weight;
                 edgesInMST++;
 
-                std::cout << "Dodano krawedz: " << u << " - " << v << " (waga: " << weight << ")\n";
+                if (Parameters::runMode == Parameters::RunModes::singleFile)
+					out << "Dodano krawedz: " << u << " - " << v << " (waga: " << weight << ")\n";
 
                 if (edgesInMST == V - 1) {
 					break; // kooniec jeżeli mamy już V-1 krawędzi w MST
@@ -119,11 +121,9 @@ public:
             }
         }
 
-        if (edgesInMST != V - 1) {
+        if (edgesInMST != V - 1)
             std::cout << "Ostrzezenie: Nie udalo sie zbudowac MST. Graf prawdopodobnie nie jest spojny!\n";
-        }
-        else {
-            std::cout << "Calkowity koszt MST: " << mstWeight << "\n";
-        }
+        else if (Parameters::runMode == Parameters::RunModes::singleFile)
+            out << "Calkowity koszt MST: " << mstWeight << "\n";
     }
 };

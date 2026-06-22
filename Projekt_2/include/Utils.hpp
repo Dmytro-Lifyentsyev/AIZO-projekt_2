@@ -11,13 +11,22 @@ using namespace std;
  */
 class Utils {
 public:
+    static string tlumaczProblem(Parameters::Problems prob) {
+        switch (prob) {
+        case Parameters::Problems::mst: return "MST";
+        case Parameters::Problems::sp: return "SP";
+        case Parameters::Problems::mf: return "MF";
+        default: return "Nieznany";
+        }
+    }
+
     static string tlumaczAlgorytm(Parameters::Algorithms alg) {
         switch (alg) {
-        case Parameters::Algorithms::prim: return "Prim (MST)";
-        case Parameters::Algorithms::kruskal: return "Kruskal (MST)";
-        case Parameters::Algorithms::dijkstra: return "Dijkstra (SP)";
-        case Parameters::Algorithms::bellmanFord: return "Bellman-Ford (SP)";
-        case Parameters::Algorithms::fordFulkerson: return "Ford-Fulkerson (MF)";
+        case Parameters::Algorithms::prim: return "Prim";
+        case Parameters::Algorithms::kruskal: return "Kruskal";
+        case Parameters::Algorithms::dijkstra: return "Dijkstra";
+        case Parameters::Algorithms::bellmanFord: return "Bellman-Ford";
+        case Parameters::Algorithms::fordFulkerson: return "Ford-Fulkerson";
         default: return "Nieznany";
         }
     }
@@ -64,15 +73,15 @@ public:
     }
 
     // Funkcja do wypisania scieżki 
-    static void printSinglePath(int startNode, int endNode, const Tablica<int>& dist, const Tablica<int>& prev) {
-        std::cout << "Najkrotsza sciezka V" << startNode << " -> V" << endNode << " | Koszt: ";
+    static void printSinglePath(int startNode, int endNode, const Tablica<int>& dist, const Tablica<int>& prev, std::ostream& out) {
+        out << "Najkrotsza sciezka V" << startNode << " -> V" << endNode << " | Koszt: ";
 
         // Jeśli dystans wynosi INT_MAX, oznacza to, że algorytm nigdy tam nie dotarł
         if (dist[endNode] == INT_MAX) {
-            std::cout << "brak trasy\n";
+            out << "brak trasy\n";
         }
         else {
-            std::cout << dist[endNode] << " | Trasa: ";
+            out << dist[endNode] << " | Trasa: ";
 
             // Zbieranie trasy: Zaczynamy od końca (endNode) i cofamy się używając tablicy prev
             Tablica<int> path;
@@ -84,10 +93,25 @@ public:
 
             // Wyswietlamy trasę we właściwej kolejności od startu do celu 
             for (int j = path.getSize() - 1; j >= 0; --j) {
-                std::cout << "V" << path[j];
-                if (j > 0) std::cout << " -> ";
+                out << "V" << path[j];
+                if (j > 0) out << " -> ";
             }
-            std::cout << "\n";
+            out << "\n";
         }
     }
+
+	// Funkcja sprawdzająca, czy dany algorytm jest odpowiedni dla wybranego problemu
+    static bool czyAlgorytmPasujeDoProblemu(Parameters::Algorithms alg, Parameters::Problems prob) {
+        if (prob == Parameters::Problems::mst) {
+            return (alg == Parameters::Algorithms::prim || alg == Parameters::Algorithms::kruskal);
+        }
+        else if (prob == Parameters::Problems::sp) {
+            return (alg == Parameters::Algorithms::dijkstra || alg == Parameters::Algorithms::bellmanFord);
+        }
+        else if (prob == Parameters::Problems::mf) {
+            return (alg == Parameters::Algorithms::fordFulkerson);
+        }
+        return false;
+    }
+
 };

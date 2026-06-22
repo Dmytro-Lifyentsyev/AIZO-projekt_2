@@ -16,7 +16,7 @@ public:
         long long minEdges = isDirected ? V : V - 1; // minimalna liczba krawedzi dla spojnosci grafu
         if (V <= 1) minEdges = 0;
 
-		if (requiredEdges < minEdges) requiredEdges = minEdges; // Zapewniamy, ze graf bedzie spojny, nawet przy niskiej gestosci
+        if (requiredEdges < minEdges) requiredEdges = minEdges; // Zapewniamy, ze graf bedzie spojny, nawet przy niskiej gestosci
 
 		Graph* graph = nullptr; // Wskaznik na graf, ktory zostanie wygenerowany
         if (useMatrix) graph = new MatrixGraph(V, requiredEdges, isDirected);

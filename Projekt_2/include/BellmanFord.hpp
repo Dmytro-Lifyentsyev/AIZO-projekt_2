@@ -8,7 +8,7 @@
 
 class BellmanFord {
 public:
-    static void run(Graph* graph, int startNode, int endNode = -1) {
+    static void run(Graph* graph, int startNode, int endNode = -1, std::ostream& out = std::cout) {
         int V = graph->getVerticesCount(); // Pobiera liczbę wierzchołków w grafie
         if (V == 0) return;
 
@@ -89,12 +89,12 @@ public:
                 return;
             }
             if (endNode >= 0 && endNode < V) {
-                Utils::printSinglePath(Start, endNode, dist, prev);
+                Utils::printSinglePath(Start, endNode, dist, prev, out);
             }
             else {
-                std::cout << "Sciezki od V" << Start << " do wszystkich wierzcholkow:\n";
+                out << "Sciezki od V" << Start << " do wszystkich wierzcholkow:\n";
                 for (int i = 0; i < V; ++i) {
-                    if (i != Start) Utils::printSinglePath(Start, i, dist, prev);
+                    if (i != Start) Utils::printSinglePath(Start, i, dist, prev, out);
                 }
             }
         }
